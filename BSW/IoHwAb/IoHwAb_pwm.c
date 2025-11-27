@@ -41,7 +41,7 @@
 /**
  * @brief Number of channels that will be used for PWM
  */
-#define IOHWAB_PWM_CHANELS				  (2U)
+#define IOHWAB_PWM_CHANELS				  (4U)
 
 /* **********************************************************************
  * Static pin configuration
@@ -124,11 +124,27 @@ static void PWM_DRV_Init3PhPwm(void)
     /* Channel B configuration */
     pwmSignal[1].pwmChannel = kPWM_PwmB;
     pwmSignal[1].level      = kPWM_HighTrue;
-    /* Dutycycle field of PWM B does not matter as we are running in PWM A complementary mode */
-    pwmSignal[1].dutyCyclePercent = IOHWAB_PWMB_DEFAULT_DUTY_PERCENT;
+    pwmSignal[1].dutyCyclePercent = IOHWAB_PWMB_DEFAULT_DUTY_PERCENT;/* Dutycycle field of PWM B does not matter as we are running in PWM A complementary mode */
     pwmSignal[1].deadtimeValue    = deadTimeVal;
     pwmSignal[1].faultState       = kPWM_PwmFaultState0;
     pwmSignal[1].pwmchannelenable = true;
+
+    /* Channel A configuration de los nuevos pines en este caso P2_3 = PWM1_B2 */
+    pwmSignal[2].pwmChannel       = kPWM_PwmA;
+    pwmSignal[2].level            = kPWM_HighTrue;
+    pwmSignal[2].dutyCyclePercent = IOHWAB_PWMA_DEFAULT_DUTY_PERCENT;
+    pwmSignal[2].deadtimeValue    = deadTimeVal;
+    pwmSignal[2].faultState       = kPWM_PwmFaultState0;
+    pwmSignal[2].pwmchannelenable = true;
+
+    /* Channel B configuration de los nuevos pines en este caso P2_4 = PWM1_A1 */
+    pwmSignal[3].pwmChannel = kPWM_PwmB;
+    pwmSignal[3].level      = kPWM_HighTrue;
+    pwmSignal[3].dutyCyclePercent = IOHWAB_PWMB_DEFAULT_DUTY_PERCENT;
+    pwmSignal[3].deadtimeValue    = deadTimeVal;
+    pwmSignal[3].faultState       = kPWM_PwmFaultState0;
+    pwmSignal[3].pwmchannelenable = true;
+
 
     /*********** PWMA_SM0 - configure both A and B channels ************/
     PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_0, pwmSignal, 2, kPWM_SignedCenterAligned, pwmFrequencyInHz,
@@ -139,8 +155,13 @@ static void PWM_DRV_Init3PhPwm(void)
                  pwmSourceClockInHz);
 
     /*********** PWMA_SM2 - configure only channel A ************/
-    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_2, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_2, pwmSignal, 2, kPWM_SignedCenterAligned, pwmFrequencyInHz,
                  pwmSourceClockInHz);
+
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_3, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                     pwmSourceClockInHz);
+
+
 }
 
 /* **********************************************************************
@@ -167,6 +188,10 @@ void Init_Pin_PWM(void)
 	/* Configure pin muxing for PWM outputs */
 	PORT_SetPinConfig(PORT2, LINE_PRESSURE_PIN, &s_pwmPinConfig);
 	PORT_SetPinConfig(PORT2, TCC_CONTROL_PIN, &s_pwmPinConfig);
+	//Nuevos puertos los cuales no se si esten bien
+	PORT_SetPinConfig(PORT2, Selenode_A_PIN	, &s_pwmPinConfig);//3U = P2_3 /PWM1_B2
+	PORT_SetPinConfig(PORT2, Selenode_B_PIN	, &s_pwmPinConfig);//3U = P2_4 / PWM1_A1
+	//
 
 	/* PWM configuration structures */
     pwm_config_t pwmConfig;
@@ -201,6 +226,12 @@ void Init_Pin_PWM(void)
     {
 	   PRINTF("PWM initialization failed\n");
     }
+    /* Initialize submodule 3 similarly to submodule 2 *///Esta no se si este bien, marcador --------->
+    if (PWM_Init(BOARD_PWM_BASEADDR, kPWM_Module_3, &pwmConfig) == kStatus_Fail)
+    {
+    	PRINTF("PWM initialization failed\n");
+    }
+
 
     /*
      *   faultConfig.faultClearingMode     = kPWM_Automatic;
@@ -219,13 +250,14 @@ void Init_Pin_PWM(void)
     PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_2, &faultConfig);
     PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_3, &faultConfig);
 
+
     /* Set PWM fault disable mapping for submodules 0/1/2 (channel A) */
     PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_faultchannel_0,
 							DEMO_PWM_DISABLE_MAP_OP(kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3));
     PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_1, kPWM_PwmA, kPWM_faultchannel_0,
 							DEMO_PWM_DISABLE_MAP_OP(kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3));
     PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_2, kPWM_PwmA, kPWM_faultchannel_0,
-							DEMO_PWM_DISABLE_MAP_OP(kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3));
+							DEMO_PWM_DISABLE_MAP_OP(kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3 ));
 
     /*
      * Recommend to call PWM_SetupPwm after PWM and fault configuration,
@@ -234,8 +266,8 @@ void Init_Pin_PWM(void)
     PWM_DRV_Init3PhPwm();
 
     /* Set the load OK bit for all submodules to load registers from their buffer */
-    PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
+    PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2 | kPWM_Control_Module_3 , true);
 
     /* Start the PWM generation from Submodules 0, 1 and 2 */
-    PWM_StartTimer(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2);
+    PWM_StartTimer(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2  | kPWM_Control_Module_3 );
 }
