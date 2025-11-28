@@ -39,6 +39,11 @@
  * @brief PWM pin used for TCC (Torque Converter Clutch) control.
  */
 #define TCC_CONTROL_PIN		(7U)
+//Seleoides que Juan me dira para que vrg los quiere
+
+#define Selenode_A_PIN		(3U)
+#define Selenode_B_PIN		(4U)
+
 
 /* **********************************************************************
  * PWM Hardware Configuration Macros
