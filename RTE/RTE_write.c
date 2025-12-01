@@ -36,6 +36,15 @@ void Rte_write_g_CAN_IgnitionStatus(uint8 IgnStatus)
 {
 	Set_g_CAN_IgnitionStatus(IgnStatus);
 }
+
+void Write_TCM_TurbineSpeed_TSS(uint32 value)
+{
+    Set_TCM_TurbineSpeed_TSS(value);
+}
+void Write_TCM_OutputSpeed_OSS(uint32 value)
+{
+    Set_TCM_OutputSpeed_OSS(value);
+}
 //void Rte_write_g_HW_LeverPosition(uint8 LvrPosition)
 //{
 //	set_g_HW_LeverPosition(LvrPosition);

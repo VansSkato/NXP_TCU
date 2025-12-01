@@ -2,7 +2,7 @@
  * set_signals.c
  *
  *  Created on: Nov 11, 2025
- *      Author: bruno
+ *      Author: Emilio
  */
 
 #include "set_signals.h"
@@ -75,3 +75,18 @@ void Set_g_OUT_CurrentGear(uint8 Gear)
 {
 	g_OUT_CurrentGear = Gear;
 }
+// =====================
+// INTERNAL TRANSMISSION SENSORS
+// =====================
+void Set_TCM_TurbineSpeed_TSS(uint32 value) {
+
+	g_TCM_TurbineSpeed_TSS = value; }
+
+void Set_TCM_OutputSpeed_OSS(uint32 value) {
+
+	g_TCM_OutputSpeed_OSS = value; }
+
+void Set_TCM_FluidTemp_TFT(sint32 value) {
+
+	g_TCM_FluidTemp_TFT = value; }
+

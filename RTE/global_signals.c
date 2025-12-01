@@ -6,6 +6,12 @@
  */
 #include "global_signals.h" // Incluimos su propio.h por consistencia
 // --- DEFINICIONES DE SEÑALES GLOBALES ---
+// =====================
+// INTERNAL TRANSMISSION SENSORS
+// =====================
+uint32 g_TCM_TurbineSpeed_TSS;       // Turbine/Input Speed Sensor
+uint32 g_TCM_OutputSpeed_OSS;        // Output Speed Sensor
+sint32 g_TCM_FluidTemp_TFT;          // Transmission Fluid Temperature
 
 // Señales de CAN (entradas a la TCU)
 uint16 g_CAN_EngineRPM = 0; 		//RPM del motor

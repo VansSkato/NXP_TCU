@@ -186,11 +186,11 @@ static void PWM_DRV_Init3PhPwm(void)
 void Init_Pin_PWM(void)
 {
 	/* Configure pin muxing for PWM outputs */
-	PORT_SetPinConfig(PORT2, LINE_PRESSURE_PIN, &s_pwmPinConfig);
-	PORT_SetPinConfig(PORT2, TCC_CONTROL_PIN, &s_pwmPinConfig);
+	PORT_SetPinConfig(PORT2, LINE_PRESSURE, &s_pwmPinConfig);
+	PORT_SetPinConfig(PORT2, TCC_CONTROL, &s_pwmPinConfig);
 	//Nuevos puertos los cuales no se si esten bien
-	PORT_SetPinConfig(PORT2, Selenode_A_PIN	, &s_pwmPinConfig);//3U = P2_3 /PWM1_B2
-	PORT_SetPinConfig(PORT2, Selenode_B_PIN	, &s_pwmPinConfig);//3U = P2_4 / PWM1_A1
+	PORT_SetPinConfig(PORT2, Selenode_A	, &s_pwmPinConfig);//3U = P2_3 /PWM1_B2
+	PORT_SetPinConfig(PORT2, Selenode_B	, &s_pwmPinConfig);//3U = P2_4 / PWM1_A1
 	//
 
 	/* PWM configuration structures */

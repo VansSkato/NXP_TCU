@@ -33,16 +33,16 @@
  * This value represents the pin number within the corresponding PORT
  * instance configured in IoHwAb_pwm.c (actual PORTx is board-specific).
  */
-#define LINE_PRESSURE_PIN	(6U)
-
-/**
- * @brief PWM pin used for TCC (Torque Converter Clutch) control.
- */
-#define TCC_CONTROL_PIN		(7U)
+//#define LINE_PRESSURE_PIN  6U
+//
+///**
+// * @brief PWM pin used for TCC (Torque Converter Clutch) control.
+// */
+#define TCC_CONTROL 7U
 //Seleoides que Juan me dira para que vrg los quiere
 
-#define Selenode_A_PIN		(3U)
-#define Selenode_B_PIN		(4U)
+#define Selenode_A  3U
+#define Selenode_B 4U
 
 
 /* **********************************************************************
@@ -54,6 +54,8 @@
  * Must match the instance used in IoHwAb_pwm.c (e.g. PWM1).
  */
 #define BOARD_PWM_BASEADDR        PWM1
+
+#define LINE_PRESSURE 6U
 
 /**
  * @brief Source clock for the PWM module.
