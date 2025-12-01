@@ -15,6 +15,15 @@
 // --- DECLARACIONES EXTERNAS DE SEÑALES GLOBALES ---
 // "extern" significa: "Esta variable está definida en OTRO archivo.c"
 
+
+// =====================
+// INTERNAL TRANSMISSION SENSORS
+// =====================
+extern uint32 g_TCM_TurbineSpeed_TSS;        // Turbine/Input Speed Sensor
+extern uint32 g_TCM_OutputSpeed_OSS;         // Output Speed Sensor
+extern sint32 g_TCM_FluidTemp_TFT;           // Transmission Fluid Temperature
+
+
 // Señales de CAN (entradas a la TCU)
 extern uint16 g_CAN_EngineRPM; 		//RPM del motor
 extern uint8 g_CAN_ThrottlePosition;   //Torque demandado por el conductor

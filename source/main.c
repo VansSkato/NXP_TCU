@@ -23,6 +23,7 @@
 #include "IoHwAb_adc.h"
 #include "IoHwAb_pwm.h"
 #include "MCU.h"
+#include "proyecto_final2.h"
 
 
 /*******************************************************************************
@@ -37,7 +38,6 @@
  * Prototypes
  ******************************************************************************/
 static void hello_task(void *pvParameters);
-
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -101,6 +101,7 @@ static void hello_task(void *pvParameters)
 
     for (;;)
     {
+    	proyecto_final2_step();
     	delay();
 
 //        /* Delay at least 100 PWM periods. */
@@ -124,8 +125,8 @@ static void hello_task(void *pvParameters)
 
 /*PRUEBAS ADC*/
     	LPADC_DoSoftwareTrigger(TCM_LPADC0_BASE, triggerMask1);
-    	LPADC_DoSoftwareTrigger(TCM_LPADC0_BASE, triggerMask2);
-    	LPADC_DoSoftwareTrigger(TCM_LPADC1_BASE, triggerMask3);
+    	LPADC_DoSoftwareTrigger(TCM_LPADC0_BASE, triggerMask1);
+    	LPADC_DoSoftwareTrigger(TCM_LPADC1_BASE, triggerMask1);
 
     	while (!LPADC_GetConvResult(TCM_LPADC0_BASE, &result1, 0U))
     	{

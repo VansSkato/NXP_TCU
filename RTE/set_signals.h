@@ -31,5 +31,13 @@ void Set_g_OUT_TCC_ControlSolenoid(uint8 CntrlSol);
 void Set_g_OUT_ShiftLock_Solenoid(uint8 ShiftLock);
 void Set_g_OUT_TorqueReduction_Request(uint8 TrqReduction);
 void Set_g_OUT_CurrentGear(uint8 Gear);
+// =====================
+// INTERNAL TRANSMISSION SENSORS
+// =====================
+void Set_TCM_TurbineSpeed_TSS(uint32 value);
+void Set_TCM_OutputSpeed_OSS(uint32 value);
+void Set_TCM_FluidTemp_TFT(sint32 value);
+
+
 
 #endif /* RTE_SET_SIGNALS_H_ */

@@ -24,6 +24,10 @@ void Rte_write_g_HW_InputSpeed(uint16 InSpeed);
 void Rte_write_g_HW_OutputSpeed(uint16 OutSpeed);
 void Rte_write_g_HW_TransmissionTEMP(sint8 Temperature);
 
+// INTERNAL TRANSMISSION SENSORS
+void Write_TCM_TurbineSpeed_TSS(uint32 value);
+void Write_TCM_OutputSpeed_OSS(uint32 value);
+void Write_TCM_FluidTemp_TFT(sint32 value);
 //Outputs
 void Rte_write_g_OUT_ShiftSolenoid(uint8 ShiftSol);
 void Rte_write_g_OUT_LinePressure_Control(uint8 Pressure);

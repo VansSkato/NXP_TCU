@@ -123,6 +123,7 @@ void Init_Pin_BreakPedal (void)
  *  - DRIVE_PIN   : Drive position (D)
  *  - FIRST_PIN   : First manual gear (1)
  *  - SECOND_PIN  : Second manual gear (2)
+ *  -THIRD_PIN	  : Third manual gear (3)
  *
  * All pins are muxed as GPIO and configured as digital inputs.
  */
@@ -135,6 +136,8 @@ void Init_Pin_GearPossition(void)
     PORT_SetPinConfig(PORT2, DRIVE_PIN, &s_gpioPinConfig);
     PORT_SetPinConfig(PORT1, FIRST_PIN, &s_gpioPinConfig);
     PORT_SetPinConfig(PORT1, SECOND_PIN, &s_gpioPinConfig);
+    PORT_SetPinConfig(PORT1, THIRD_PIN, &s_gpioPinConfig);
+
 
     /* --- GPIO configuration as digital inputs --- */
 
@@ -173,6 +176,13 @@ void Init_Pin_GearPossition(void)
         GPIO_LOGIC_LEVEL_LOW,
     };
     GPIO_PinInit(GPIO1, SECOND_PIN, &secondConfig);
+
+    gpio_pin_config_t thirdConfig = {
+            kGPIO_DigitalInput,
+            GPIO_LOGIC_LEVEL_LOW,
+
+    };
+    GPIO_PinInit(GPIO1, THIRD_PIN, &thirdConfig);
 }
 
 /**
