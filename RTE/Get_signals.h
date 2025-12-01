@@ -10,6 +10,14 @@
 
 #include "Platform_Types.h"
 #include "global_signals.h"
+// =====================
+// INTERNAL TRANSMISSION SENSORS
+// =====================
+extern uint32 g_TCM_TurbineSpeed_TSS;        // Turbine/Input Speed Sensor
+extern uint32 g_TCM_OutputSpeed_OSS;         // Output Speed Sensor
+extern sint32 g_TCM_FluidTemp_TFT;           // Transmission Fluid Temperature
+
+
 
 //Inputs
 uint16 Get_g_CAN_EngineRPM(void);

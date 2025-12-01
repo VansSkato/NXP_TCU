@@ -56,6 +56,7 @@
 #define DRIVE_PIN		(0U)			/**< Gear position: Drive    */
 #define FIRST_PIN		(23U)			/**< Gear position: 1st gear */
 #define SECOND_PIN		(13U)			/**< Gear position: 2nd gear */
+#define THIRD_PIN		(14U)			/**< Gear position: 3nd gear */
 /** @} */
 
 /**
@@ -65,7 +66,7 @@
 #define SOLENOID_A_PIN      (17U)  	/**< Solenoid A */
 #define SOLENOID_B_PIN      (22U)  	/**< Solenoid B */
 #define SOLENOID_C_PIN      (15U)  	/**< Solenoid C */
-#define SOLENOID_D_PIN      (14U)   	/**< Solenoid D */
+#define SOLENOID_D_PIN      (14U)   /**< Solenoid D */
 #define SOLENOID_E_PIN      (4U)  	/**< Solenoid E */
 /** @} */
 
