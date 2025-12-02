@@ -16,13 +16,14 @@ void Rte_read_g_CAN_EngineRPM(uint16 *RPMS);
 void Rte_read_g_CAN_ThrottlePosition(uint8 *TrtPosition);
 void Rte_read_g_CAN_EngineTorque(sint16 *Torque);
 void Rte_read_g_CAN_VehicleSpeed(sint16 *VhSpeed);
-void Rte_read_g_CAN_DriveMode(uint8 *Mode);
+void Rte_read_g_CAN_DriveMode(uint16 *Mode);
 void Rte_read_g_CAN_IgnitionStatus(uint8 *IgnStatus);
 void Rte_read_g_HW_LeverPosition(uint8 *LvrPosition);
 void Rte_read_g_HW_BrakeSW(uint8 *Brake);
 void Rte_read_g_HW_InputSpeed(uint16 *InSpeed);
 void Rte_read_g_HW_OutputSpeed(uint16 *OutSpeed);
 void Rte_read_g_HW_TransmissionTEMP(sint8 *Temperature);
+void Rte_read_g_HW_drive_gear(uint8 * drivegear);//esta yo la hice
 
 //Outputs
 void Rte_read_g_OUT_ShiftSolenoid(uint8 *ShiftSol);
