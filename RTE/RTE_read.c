@@ -2,7 +2,7 @@
  * RTE_read.c
  *
  *  Created on: Nov 20, 2025
- *      Author: bruno
+ *      Author: Emilio Diaz
  */
 
 #include "RTE_read.h"
@@ -28,7 +28,7 @@ void Rte_read_g_CAN_VehicleSpeed(sint16 *VhSpeed)
 {
 	*VhSpeed = Get_g_CAN_VehicleSpeed();
 }
-void Rte_read_g_CAN_DriveMode(uint8 *Mode)
+void Rte_read_g_CAN_DriveMode(uint16 *Mode)
 {
 	 *Mode = Get_g_CAN_DriveMode();
 }
@@ -80,3 +80,8 @@ void Rte_read_g_OUT_CurrentGear(uint8 *Gear)
 {
 	 *Gear = Get_g_OUT_CurrentGear();
 }
+/*void Rte_read_g_HW_drive_gear(uint8 *drivegear)
+{
+	 *drivegear = g_OUT_Drive_gear();
+}
+*/

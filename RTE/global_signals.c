@@ -36,3 +36,14 @@ uint8 g_OUT_TCC_ControlSolenoid = 0;	//PWM que controla la presión de los conve
 uint8 g_OUT_ShiftLock_Solenoid = 0;		//Permite el cambio de marcha si el pedal del freno esta activo
 uint8 g_OUT_TorqueReduction_Request = 0; //Reduce temporalmente el giro del motor
 uint8 g_OUT_CurrentGear = 0;			//Muestra la marcha actual en el cluster
+
+//cambios de la marcha drive://esta yo la hice
+uint8 g_OUT_Drive_gear = 0;
+
+//selonoides
+
+
+uint8 g_OUT_a = 0;
+uint8 g_OUT_b = 0;
+uint8 g_OUT_c = 0;
+uint8 g_OUT_d = 0;

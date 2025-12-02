@@ -38,6 +38,11 @@ void Set_TCM_TurbineSpeed_TSS(uint32 value);
 void Set_TCM_OutputSpeed_OSS(uint32 value);
 void Set_TCM_FluidTemp_TFT(sint32 value);
 
-
+/*
+void Rte_write_solenoide_a(uint8 ShiftSol);
+void Rte_write_solenoide_b(uint8 ShiftSol);
+void Rte_write_solenoide_c(uint8 ShiftSol);
+void Rte_write_solenoide_d(uint8 ShiftSol);
+*/
 
 #endif /* RTE_SET_SIGNALS_H_ */

@@ -73,7 +73,12 @@ uint8 Get_g_OUT_TorqueReduction_Request(void)
 {
 	return g_OUT_TorqueReduction_Request;
 }
-uint8 Get_g_OUT_CurrentGear(void)
+uint8 Get_g_OUT_CurrentGear(void)//
+{
+	return g_OUT_CurrentGear;
+}
+
+uint8 Get_g_OUT_Drive_gear(void)//esta yo la hice
 {
 	return g_OUT_CurrentGear;
 }

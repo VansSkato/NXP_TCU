@@ -85,7 +85,30 @@ void Rte_write_g_OUT_TorqueReduction_Request(uint8 TrqReduction)
 {
 	Set_g_OUT_TorqueReduction_Request(TrqReduction);
 }
-void Rte_write_g_OUT_CurrentGear(uint8 Gear)
+void Rte_write_g_OUT_CurrentGear(uint8 Gear)//falta * ??
 {
 	Set_g_OUT_CurrentGear(Gear);
 }
+
+//selenoides:
+void Rte_write_solenoide_a(uint8 ShiftSol)
+{
+	Rte_write_solenoide_a(ShiftSol);
+}
+
+void Rte_write_solenoide_b(uint8 ShiftSol)
+{
+	Rte_write_solenoide_b(ShiftSol);
+}
+
+void Rte_write_solenoide_c(uint8 ShiftSol)
+{
+	Rte_write_solenoide_c(ShiftSol);
+}
+
+void Rte_write_solenoide_d(uint8 ShiftSol)
+{
+	Rte_write_solenoide_d(ShiftSol);
+}
+
+

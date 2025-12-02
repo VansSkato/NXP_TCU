@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: Cambios.c
+ * File: Chart.c
  *
  * Code generated for Simulink model 'proyecto_final2'.
  *
- * Model version                  : 1.42
+ * Model version                  : 1.53
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Mon Dec  1 14:57:24 2025
+ * C/C++ source code generated on : Mon Dec  1 20:24:52 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -18,7 +18,7 @@
  */
 
 #include "rtwtypes.h"
-#include "Cambios.h"
+#include "Chart.h"
 
 /* Named constants for Chart: '<S2>/DriverMode' */
 #define proyecto_fin_IN_NO_ACTIVE_CHILD ((uint8_T)0U)
@@ -40,10 +40,10 @@
 /* Forward declaration for local functions */
 static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
   *LogicalOperator, uint8_T rtu_Gear_Lever_Position, uint8_T
-  rtu_Brake_Pedal_Switch, uint8_T rtu_Switch, uint8_T rtu_LINE_PRESSURE_PIN,
-  uint8_T rtu_TCC_CONTROL_PIN, uint8_T rtu_Selenode_A_PIN, uint8_T
-  rtu_Selenode_B_PIN, uint16_T *rty_value3, DW_Cambios_proyecto_final2_T
-  *localDW);
+  rtu_Brake_Pedal_Switch, uint8_T rtu_Switch, uint8_T rtu_Selenode_A_PIN,
+  uint8_T rtu_Selenode_B_PIN, uint8_T rtu_TCC_CONTROL_PIN, uint8_T
+  rtu_LINE_PRESSURE_PIN, uint8_T *rty_Current_Gear, uint16_T *rty_value3,
+  DW_Chart_proyecto_final2_T *localDW);
 
 /* Output and update for function-call system: '<S2>/Shift_Lock' */
 boolean_T proyecto_final2_Shift_Lock(uint8_T rtu_B1, uint8_T rtu_B2)
@@ -58,57 +58,23 @@ boolean_T proyecto_final2_Shift_Lock(uint8_T rtu_B1, uint8_T rtu_B2)
 }
 
 /* Output and update for function-call system: '<S3>/Rpm_Limiter2' */
-uint16_T proyecto_final2_Rpm_Limiter2(uint16_T rtu_D1)
+uint16_T proyecto_final2_Rpm_Limiter2(void)
 {
-  uint16_T rty_result4_0;
-
   /* Switch: '<S5>/Switch' incorporates:
    *  Constant: '<S5>/Constant'
-   *  Constant: '<S6>/Constant'
-   *  Constant: '<S7>/Constant'
-   *  Constant: '<S8>/Constant'
-   *  RelationalOperator: '<S6>/Compare'
-   *  RelationalOperator: '<S7>/Compare'
-   *  RelationalOperator: '<S8>/Compare'
-   *  Switch: '<S5>/Switch1'
-   *  Switch: '<S5>/Switch2'
    */
-  if (rtu_D1 == 0) {
-    rty_result4_0 = 5000U;
-  } else if (rtu_D1 == 1) {
-    /* Switch: '<S5>/Switch1' incorporates:
-     *  Constant: '<S5>/Constant1'
-     */
-    rty_result4_0 = 2500U;
-  } else if (rtu_D1 == 2) {
-    /* Switch: '<S5>/Switch2' incorporates:
-     *  Constant: '<S5>/Constant2'
-     *  Switch: '<S5>/Switch1'
-     */
-    rty_result4_0 = 6500U;
-  } else {
-    /* Switch: '<S5>/Switch1' incorporates:
-     *  Constant: '<S5>/Constant3'
-     *  Switch: '<S5>/Switch2'
-     */
-    rty_result4_0 = 750U;
-  }
-
-  /* End of Switch: '<S5>/Switch' */
-  return rty_result4_0;
+  return 5000U;
 }
 
 /* Function for Chart: '<S1>/Chart' */
 static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
   *LogicalOperator, uint8_T rtu_Gear_Lever_Position, uint8_T
-  rtu_Brake_Pedal_Switch, uint8_T rtu_Switch, uint8_T rtu_LINE_PRESSURE_PIN,
-  uint8_T rtu_TCC_CONTROL_PIN, uint8_T rtu_Selenode_A_PIN, uint8_T
-  rtu_Selenode_B_PIN, uint16_T *rty_value3, DW_Cambios_proyecto_final2_T
-  *localDW)
+  rtu_Brake_Pedal_Switch, uint8_T rtu_Switch, uint8_T rtu_Selenode_A_PIN,
+  uint8_T rtu_Selenode_B_PIN, uint8_T rtu_TCC_CONTROL_PIN, uint8_T
+  rtu_LINE_PRESSURE_PIN, uint8_T *rty_Current_Gear, uint16_T *rty_value3,
+  DW_Chart_proyecto_final2_T *localDW)
 {
   boolean_T b;
-
-  /* Chart: '<S1>/Chart' */
   *B1 = rtu_Brake_Pedal_Switch;
   *B2 = rtu_Switch;
 
@@ -122,7 +88,6 @@ static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
     break;
 
    case proyecto_final2_IN_First:
-    /* Chart: '<S1>/Chart' */
     b = ((*rty_value3 == 2500) || (*rty_value3 == 5000) || ((*rty_value3 == 6500)
           && (rtu_Gear_Lever_Position != 4) && (rtu_Gear_Lever_Position != 5) &&
           (rtu_Gear_Lever_Position != 6) && (rtu_LINE_PRESSURE_PIN == 1) &&
@@ -130,6 +95,8 @@ static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
           (rtu_Selenode_B_PIN == 1)));
     if (b) {
       localDW->is_Drive = proyecto_final2_IN_Second;
+    } else {
+      *rty_Current_Gear = 1U;
     }
     break;
 
@@ -138,7 +105,6 @@ static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
     break;
 
    case proyecto_final2_IN_Second:
-    /* Chart: '<S1>/Chart' */
     b = ((*rty_value3 == 2500) || (*rty_value3 == 5000) || ((*rty_value3 == 6500)
           && (rtu_Gear_Lever_Position != 4) && (rtu_Gear_Lever_Position != 5) &&
           (rtu_Gear_Lever_Position != 6) && (rtu_LINE_PRESSURE_PIN == 1) &&
@@ -162,29 +128,22 @@ static void proyecto_final2_Drive(uint8_T *B2, uint8_T *B1, boolean_T
   }
 }
 
-/* System initialize for atomic system: '<Root>/ Cambios' */
-void proyecto_final2_Cambios_Init(uint8_T *rty_Current_Gear, uint8_T
-  *rty_Transmission_MIL_Status, uint16_T *rty_value3, boolean_T *rty_value,
-  uint8_T *rty_TCC_Control_Solenoid, uint8_T *rty_Shift_Solenoid_A, uint8_T
-  *rty_Shift_Lock_Solenoid, uint8_T *rty_Line_Pressure_Control_Solen)
+/* System initialize for atomic system: '<S1>/Chart' */
+void proyecto_final2_Chart_Init(uint8_T *rty_Current_Gear, uint16_T *rty_value3,
+  boolean_T *rty_value)
 {
-  /* SystemInitialize for Chart: '<S1>/Chart' */
   *rty_Current_Gear = 0U;
-  *rty_Transmission_MIL_Status = 0U;
   *rty_value3 = 0U;
   *rty_value = false;
-  *rty_TCC_Control_Solenoid = 0U;
-  *rty_Shift_Solenoid_A = 0U;
-  *rty_Shift_Lock_Solenoid = 0U;
-  *rty_Line_Pressure_Control_Solen = 0U;
 }
 
-/* Output and update for atomic system: '<Root>/ Cambios' */
-void proyecto_final2_Cambios(uint8_T rtu_Gear_Lever_Position, uint8_T
+/* Output and update for atomic system: '<S1>/Chart' */
+void proyecto_final2_Chart(uint8_T rtu_Gear_Lever_Position, uint8_T
   rtu_Brake_Pedal_Switch, uint16_T rtu_Driver_Mode_Selection, uint8_T rtu_Switch,
-  uint8_T rtu_LINE_PRESSURE_PIN, uint8_T rtu_TCC_CONTROL_PIN, uint8_T
-  rtu_Selenode_A_PIN, uint8_T rtu_Selenode_B_PIN, uint16_T *rty_value3,
-  boolean_T *rty_value, DW_Cambios_proyecto_final2_T *localDW)
+  uint8_T rtu_Selenode_A_PIN, uint8_T rtu_Selenode_B_PIN, uint8_T
+  rtu_TCC_CONTROL_PIN, uint8_T rtu_LINE_PRESSURE_PIN, uint8_T *rty_Current_Gear,
+  uint16_T *rty_value3, boolean_T *rty_value, DW_Chart_proyecto_final2_T
+  *localDW)
 {
   uint16_T Switch;
   uint8_T B1;
@@ -200,9 +159,9 @@ void proyecto_final2_Cambios(uint8_T rtu_Gear_Lever_Position, uint8_T
      case proyecto_final2_IN_Drive:
       proyecto_final2_Drive(&B2, &B1, &LogicalOperator, rtu_Gear_Lever_Position,
                             rtu_Brake_Pedal_Switch, rtu_Switch,
-                            rtu_LINE_PRESSURE_PIN, rtu_TCC_CONTROL_PIN,
-                            rtu_Selenode_A_PIN, rtu_Selenode_B_PIN, rty_value3,
-                            localDW);
+                            rtu_Selenode_A_PIN, rtu_Selenode_B_PIN,
+                            rtu_TCC_CONTROL_PIN, rtu_LINE_PRESSURE_PIN,
+                            rty_Current_Gear, rty_value3, localDW);
       break;
 
      case proyecto_final2_IN_DriverMode:
@@ -224,7 +183,7 @@ void proyecto_final2_Cambios(uint8_T rtu_Gear_Lever_Position, uint8_T
 
            default:
             /* Outputs for Function Call SubSystem: '<S3>/Rpm_Limiter2' */
-            Switch = proyecto_final2_Rpm_Limiter2(rtu_Driver_Mode_Selection);
+            Switch = proyecto_final2_Rpm_Limiter2();
 
             /* End of Outputs for SubSystem: '<S3>/Rpm_Limiter2' */
             *rty_value3 = Switch;
@@ -244,7 +203,7 @@ void proyecto_final2_Cambios(uint8_T rtu_Gear_Lever_Position, uint8_T
 
            default:
             /* Outputs for Function Call SubSystem: '<S3>/Rpm_Limiter2' */
-            Switch = proyecto_final2_Rpm_Limiter2(rtu_Driver_Mode_Selection);
+            Switch = proyecto_final2_Rpm_Limiter2();
 
             /* End of Outputs for SubSystem: '<S3>/Rpm_Limiter2' */
             *rty_value3 = Switch;
@@ -265,7 +224,7 @@ void proyecto_final2_Cambios(uint8_T rtu_Gear_Lever_Position, uint8_T
 
            default:
             /* Outputs for Function Call SubSystem: '<S3>/Rpm_Limiter2' */
-            Switch = proyecto_final2_Rpm_Limiter2(rtu_Driver_Mode_Selection);
+            Switch = proyecto_final2_Rpm_Limiter2();
 
             /* End of Outputs for SubSystem: '<S3>/Rpm_Limiter2' */
             *rty_value3 = Switch;

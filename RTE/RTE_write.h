@@ -34,6 +34,11 @@ void Rte_write_g_OUT_LinePressure_Control(uint8 Pressure);
 void Rte_write_g_OUT_TCC_ControlSolenoid(uint8 CntrlSol);
 void Rte_write_g_OUT_ShiftLock_Solenoid(uint8 ShiftLock);
 void Rte_write_g_OUT_TorqueReduction_Request(uint8 TrqReduction);
-void Rte_write_g_OUT_CurrentGear(uint8 Gear);
+void Rte_write_g_OUT_CurrentGear(uint8 Gear);//falta *   ?
+//selonoides
+void Rte_write_solenoide_a(uint8 ShiftSol);
+void Rte_write_solenoide_b(uint8 ShiftSol);
+void Rte_write_solenoide_c(uint8 ShiftSol);
+void Rte_write_solenoide_d(uint8 ShiftSol);
 
 #endif /* RTE_RTE_WRITE_H_ */
