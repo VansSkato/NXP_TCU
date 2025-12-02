@@ -89,5 +89,7 @@
  * *********************************************************************/
 static void PWM_DRV_Init3PhPwm(void);
 void Init_Pin_PWM(void);
+void TCM_set_line_pressure(void);
+void TCM_set_TCC_control(void);
 
 #endif /* _IOHWAB_PWM_H_ */

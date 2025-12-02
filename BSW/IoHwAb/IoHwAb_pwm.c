@@ -21,6 +21,8 @@
 #include "fsl_port.h"
 #include "pin_mux.h"
 #include "fsl_pwm.h"
+#include "Platform_Types.h"
+#include "RTE_read.h"
 
 /* **********************************************************************
  * Local configuration constants
@@ -35,13 +37,14 @@
 /**
  * @brief Default duty cycle (in percent) for initial PWM setup.
  */
-#define IOHWAB_PWMA_DEFAULT_DUTY_PERCENT  (80U)
-#define IOHWAB_PWMB_DEFAULT_DUTY_PERCENT  (80U)
+#define IOHWAB_PWMA_DEFAULT_DUTY_PERCENT  (50U)
+#define IOHWAB_PWMB_DEFAULT_DUTY_PERCENT  (50U)
 
 /**
  * @brief Number of channels that will be used for PWM
  */
 #define IOHWAB_PWM_CHANELS				  (4U)
+#define IOHWAB_PWM_MAX_DUTY_PERCENT       (100U)
 
 /* **********************************************************************
  * Static pin configuration
@@ -74,7 +77,7 @@ static const port_pin_config_t s_pwmPinConfig = {
     /* Pin is configured as GPIO */
 	kPORT_MuxAlt5,
     /* Digital input enabled */
-    kPORT_InputBufferDisable,
+    kPORT_InputBufferEnable,
     /* Digital input is not inverted */
     kPORT_InputNormal,
     /* Pin Control Register fields [15:0] are not locked */
@@ -196,8 +199,11 @@ void Init_Pin_PWM(void)
 	/* PWM configuration structures */
     pwm_config_t pwmConfig;
     pwm_fault_param_t faultConfig;
+    uint32_t pwmVal = 4;
 
+    SYSCON->PWM1SUBCTL |= (SYSCON_PWM1SUBCTL_CLK0_EN_MASK | SYSCON_PWM1SUBCTL_CLK1_EN_MASK | SYSCON_PWM1SUBCTL_CLK2_EN_MASK);
     PWM_GetDefaultConfig(&pwmConfig);
+
 
     /* Use full cycle reload */
     pwmConfig.reloadLogic = kPWM_ReloadPwmFullCycle;
@@ -270,4 +276,57 @@ void Init_Pin_PWM(void)
 
     /* Start the PWM generation from Submodules 0, 1 and 2 */
     PWM_StartTimer(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2  | kPWM_Control_Module_3 );
+}
+
+/**
+ * @brief Updates line pressure PWM duty cycle from RTE command.
+ *
+ * The function:
+ *  - Reads desired duty cycle (0–100 %) from RTE (g_OUT_LinePressure_Control).
+ *  - Saturates the value to [0, IOHWAB_PWM_MAX_DUTY_PERCENT].
+ *  - Updates PWM duty of submodule 0, channel A.
+ */
+void TCM_set_line_pressure(void)
+{
+	uint8 Duty_pressure = 0;
+
+	Rte_read_g_OUT_LinePressure_Control (&Duty_pressure);
+
+	if (Duty_pressure > IOHWAB_PWM_MAX_DUTY_PERCENT)
+	{
+		Duty_pressure = IOHWAB_PWM_MAX_DUTY_PERCENT;
+	}
+
+	PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_SignedCenterAligned, Duty_pressure);
+	PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
+}
+
+/**
+ * @brief Updates TCC control PWM duty cycle from RTE command.
+ *
+ * The function:
+ *  - Reads desired duty cycle from RTE.
+ *  - Saturates to [0, IOHWAB_PWM_MAX_DUTY_PERCENT].
+ *  - Applies a scaling (/2) before writing:
+ *        effectiveDuty = Duty_TCC >> 1
+ *    (i.e. TCC duty is half of the requested value).
+ *  - Updates PWM duty of submodule 1, channel A.
+ *
+ * @note Currently it reads from g_OUT_LinePressure_Control. If a dedicated
+ *       TCC output signal exists in the RTE (e.g. g_OUT_TCC_Control), this
+ *       function should be updated to use that signal instead.
+ */
+void TCM_set_TCC_control(void)
+{
+	uint8 Duty_TCC = 0;
+
+	Rte_read_g_OUT_LinePressure_Control (&Duty_TCC);
+
+	if (Duty_TCC > IOHWAB_PWM_MAX_DUTY_PERCENT)
+	{
+		Duty_TCC = IOHWAB_PWM_MAX_DUTY_PERCENT;
+	}
+
+	PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmB, kPWM_SignedCenterAligned, Duty_TCC );
+	PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
 }
