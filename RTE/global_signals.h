@@ -47,5 +47,16 @@ extern uint8 g_OUT_TCC_ControlSolenoid;	//PWM que controla la presión de los co
 extern uint8 g_OUT_ShiftLock_Solenoid;		//Permite el cambio de marcha si el pedal del freno esta activo
 extern uint8 g_OUT_TorqueReduction_Request; //Reduce temporalmente el giro del motor
 extern uint8 g_OUT_CurrentGear;			//Muestra la marcha actual en el cluster
+//cambios de dirve
+extern uint8 g_OUT_Drive_gear;//esta yo la cree
 
+
+
+//selonoides:
+
+
+extern uint8 g_OUT_a;
+extern uint8 g_OUT_b;
+extern uint8 g_OUT_c;
+extern uint8 g_OUT_d;
 #endif /* RTE_GLOBAL_SIGNALS_H_ */

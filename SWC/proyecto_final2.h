@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'proyecto_final2'.
  *
- * Model version                  : 1.38
+ * Model version                  : 1.53
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Nov 27 20:32:34 2025
+ * C/C++ source code generated on : Mon Dec  1 20:24:52 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -66,15 +66,8 @@ typedef struct {
 /* External outputs (root outports fed by signals with default storage) */
 typedef struct {
   uint8_T Current_Gear;                /* '<Root>/Current_Gear' */
-  uint8_T Transmission_MIL_Status;     /* '<Root>/Transmission_MIL_Status' */
   uint16_T value3;                     /* '<Root>/value3' */
   boolean_T value;                     /* '<Root>/value' */
-  uint8_T TCC_Control_Solenoid;        /* '<Root>/TCC_Control_Solenoid' */
-  uint8_T Shift_Solenoid_A;            /* '<Root>/Shift_Solenoid_A' */
-  uint8_T Shift_Lock_Solenoid;         /* '<Root>/Shift_Lock_Solenoid' */
-  uint8_T Line_Pressure_Control_Solenoid;
-                                   /* '<Root>/Line_Pressure_Control_Solenoid' */
-  uint8_T Shift_Solenoid_A_B_C;        /* '<Root>/Shift_Solenoid_A_B_C' */
 } ExtY_proyecto_final2_T;
 
 /* Real-time Model Data Structure */
@@ -101,6 +94,22 @@ extern void proyecto_final2_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_proyecto_final2_T *const proyecto_final2_M;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S6>/Compare' : Unused code path elimination
+ * Block '<S6>/Constant' : Unused code path elimination
+ * Block '<S7>/Compare' : Unused code path elimination
+ * Block '<S7>/Constant' : Unused code path elimination
+ * Block '<S8>/Compare' : Unused code path elimination
+ * Block '<S8>/Constant' : Unused code path elimination
+ * Block '<S5>/Constant1' : Unused code path elimination
+ * Block '<S5>/Constant2' : Unused code path elimination
+ * Block '<S5>/Constant3' : Unused code path elimination
+ * Block '<S5>/Switch1' : Unused code path elimination
+ * Block '<S5>/Switch2' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly

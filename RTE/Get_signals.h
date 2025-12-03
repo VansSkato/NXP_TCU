@@ -30,6 +30,7 @@ uint8 Get_g_HW_BrakeSW(void);
 uint16 Get_g_HW_InputSpeed(void);
 uint16 Get_g_HW_OutputSpeed(void);
 sint8 Get_g_HW_TransmissionTEMP(void);
+//me falta agregarla aqui
 
 //Outputs
 uint8 Get_g_OUT_ShiftSolenoid(void);

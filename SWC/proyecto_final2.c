@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'proyecto_final2'.
  *
- * Model version                  : 1.38
+ * Model version                  : 1.53
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Nov 27 20:32:34 2025
+ * C/C++ source code generated on : Mon Dec  1 20:24:52 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -49,6 +49,7 @@ void proyecto_final2_step(void)
    *  Inport: '<Root>/Selenode_B_PIN'
    *  Inport: '<Root>/Switch'
    *  Inport: '<Root>/TCC_CONTROL_PIN'
+   *  Outport: '<Root>/Current_Gear'
    *  Outport: '<Root>/value'
    */
   proyecto_final2_Cambios(proyecto_final2_U.Gear_Lever_Position,
@@ -56,8 +57,8 @@ void proyecto_final2_step(void)
     proyecto_final2_U.Driver_Mode_Selection, proyecto_final2_U.Switch,
     proyecto_final2_U.LINE_PRESSURE_PIN, proyecto_final2_U.TCC_CONTROL_PIN,
     proyecto_final2_U.Selenode_A_PIN, proyecto_final2_U.Selenode_B_PIN,
-    &proyecto_final2_B.value3, &proyecto_final2_Y.value,
-    &proyecto_final2_DW.Cambios);
+    &proyecto_final2_Y.Current_Gear, &proyecto_final2_B.value3,
+    &proyecto_final2_Y.value, &proyecto_final2_DW.Cambios);
 
   /* End of Outputs for SubSystem: '<Root>/ Cambios' */
 
@@ -71,20 +72,10 @@ void proyecto_final2_initialize(void)
   /* SystemInitialize for Atomic SubSystem: '<Root>/ Cambios' */
 
   /* SystemInitialize for Outport: '<Root>/Current_Gear' incorporates:
-   *  Outport: '<Root>/Line_Pressure_Control_Solenoid'
-   *  Outport: '<Root>/Shift_Lock_Solenoid'
-   *  Outport: '<Root>/Shift_Solenoid_A'
-   *  Outport: '<Root>/Shift_Solenoid_A_B_C'
-   *  Outport: '<Root>/TCC_Control_Solenoid'
-   *  Outport: '<Root>/Transmission_MIL_Status'
    *  Outport: '<Root>/value'
    */
   proyecto_final2_Cambios_Init(&proyecto_final2_Y.Current_Gear,
-    &proyecto_final2_Y.Transmission_MIL_Status, &proyecto_final2_B.value3,
-    &proyecto_final2_Y.value, &proyecto_final2_Y.TCC_Control_Solenoid,
-    &proyecto_final2_Y.Shift_Solenoid_A, &proyecto_final2_Y.Shift_Lock_Solenoid,
-    &proyecto_final2_Y.Line_Pressure_Control_Solenoid,
-    &proyecto_final2_Y.Shift_Solenoid_A_B_C);
+    &proyecto_final2_B.value3, &proyecto_final2_Y.value);
 
   /* End of SystemInitialize for SubSystem: '<Root>/ Cambios' */
 }

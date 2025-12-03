@@ -89,4 +89,25 @@ void Set_TCM_OutputSpeed_OSS(uint32 value) {
 void Set_TCM_FluidTemp_TFT(sint32 value) {
 
 	g_TCM_FluidTemp_TFT = value; }
+/////////////////////////////////////
+//solenoides:
+/*void Rte_write_solenoide_a(uint8 ShiftSol)
+{
+	g_OUT_a = ShiftSol;
+}
 
+void Rte_write_solenoide_b(uint8 ShiftSol)
+{
+	g_OUT_b = ShiftSol;
+}
+
+void Rte_write_solenoide_c(uint8 ShiftSol)
+{
+	g_OUT_c = ShiftSol;
+}
+
+void Rte_write_solenoide_d(uint8 ShiftSol)
+{
+	g_OUT_d = ShiftSol;
+}
+*/

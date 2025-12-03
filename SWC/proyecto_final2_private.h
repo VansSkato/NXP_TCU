@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'proyecto_final2'.
  *
- * Model version                  : 1.38
+ * Model version                  : 1.53
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Nov 27 20:32:34 2025
+ * C/C++ source code generated on : Mon Dec  1 20:24:52 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M

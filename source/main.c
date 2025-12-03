@@ -11,19 +11,23 @@
 #include "task.h"
 #include "queue.h"
 #include "timers.h"
+#include "Rte_os.h"
 
 /* Freescale includes. */
 #include "fsl_device_registers.h"
 #include "fsl_debug_console.h"
 #include "board.h"
 #include "app.h"
-
+#include "CAN_signals_simulations.h"
 
 #include "IoHwAb_gpio.h"
 #include "IoHwAb_adc.h"
 #include "IoHwAb_pwm.h"
 #include "MCU.h"
+#include "Chart.h"
 #include "proyecto_final2.h"
+#include "proyecto_final2_types.h"
+#include "proyecto_final2_private.h"
 
 
 /*******************************************************************************
@@ -69,18 +73,9 @@ int main(void)
     BOARD_InitHardware();
     Init_Clock_Ports();
 
-    if (xTaskCreate(hello_task, "Hello_task", configMINIMAL_STACK_SIZE + 100, NULL, hello_task_PRIORITY, NULL) !=
-        pdPASS)
-    {
-        PRINTF("Task creation failed!.\r\n");
-        while (1)
-            ;
-    }
-    vTaskStartScheduler();
-    for (;;)
-        ;
+    Rte_task_Init();
 }
-
+//
 /*!
  * @brief Task responsible for printing of "Hello world." message.
  */
@@ -104,48 +99,7 @@ static void hello_task(void *pvParameters)
     	proyecto_final2_step();
     	delay();
 
-//        /* Delay at least 100 PWM periods. */
-//        SDK_DelayAtLeastUs((1000000U / APP_DEFAULT_PWM_FREQUENCY) * 100, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
-//
-//        pwmVal = pwmVal + 4;
-//
-//        /* Reset the duty cycle percentage */
-//        if (pwmVal > 100)
-//        {
-//            pwmVal = 4;
-//        }
-//
-//        /* Update duty cycles for all 3 PWM signals */
-//        PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_SignedCenterAligned, pwmVal);
-//        PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_1, kPWM_PwmA, kPWM_SignedCenterAligned, (pwmVal >> 1));
-//        PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_2, kPWM_PwmA, kPWM_SignedCenterAligned, (pwmVal >> 2));
-//
-//        /* Set the load okay bit for all submodules to load registers from their buffer */
-//        PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
 
-/*PRUEBAS ADC*/
-    	LPADC_DoSoftwareTrigger(TCM_LPADC0_BASE, triggerMask1);
-    	LPADC_DoSoftwareTrigger(TCM_LPADC0_BASE, triggerMask1);
-    	LPADC_DoSoftwareTrigger(TCM_LPADC1_BASE, triggerMask1);
-
-    	while (!LPADC_GetConvResult(TCM_LPADC0_BASE, &result1, 0U))
-    	{
-    	}
-    	value1 = ( (result1.convValue) >> g_LpadcResultShift  );
-
-    	while (!LPADC_GetConvResult(TCM_LPADC0_BASE, &result2, 0U))
-    	{
-    	}
-    	value2 = ( (result2.convValue) >> g_LpadcResultShift  );
-
-    	while (!LPADC_GetConvResult(TCM_LPADC1_BASE, &result3, 0U))
-    	{
-    	}
-    	value3 = ( (result3.convValue) >> g_LpadcResultShift  );
-
-/*PRUEBAS GPIOS*/
-//    	GPIO_PortToggle(GPIO5, 1u << LOCK_SOLENOID);
-//   	value1 = GPIO_PinRead(GPIO1,  SECOND_PIN);
 
     }
 }
