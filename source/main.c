@@ -18,7 +18,7 @@
 #include "fsl_debug_console.h"
 #include "board.h"
 #include "app.h"
-
+#include "CAN_signals_simulations.h"
 
 #include "IoHwAb_gpio.h"
 #include "IoHwAb_adc.h"
